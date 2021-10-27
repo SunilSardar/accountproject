@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string('date')->nullable();
             $table->string('type_id');//1 admin, 2 customer,3 dealer
             $table->string('customer_code')->nullable();
             $table->timestamp('email_verified_at')->nullable();
