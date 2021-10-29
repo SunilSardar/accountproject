@@ -20,9 +20,12 @@ class DeleteItemControler extends Controller
    //delete items from cart lists
     public function deleteItems (Request $request) {
 
-       $item_id = User::find($request->id);
+       $user_id = User::find($request->id);
+      
+         //delete all the records of that user from record table while deleting that user
+       $record=Record::where('customer_id',$user_id)->delete();
 
-       if ($item_id->delete()) {
+       if ($user_id->delete()&& $record) {
             return response()->json([[
           "message" => "records deleted"
         ]], 202);

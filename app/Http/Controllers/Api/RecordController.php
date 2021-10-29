@@ -34,13 +34,11 @@ class RecordController extends Controller
     
    // $rem_amt=100;
 
-    
     return response()->json($posts);
 
     }
      public function getdealers(Request $request)
     {
-
       $posts = User::orderBy('id','DESC')
                   ->where('id','!=','1')
                   ->where('type_id','!=','2');
@@ -67,10 +65,17 @@ class RecordController extends Controller
 
      public function get_records(Request $request)
     {
-   $posts = Record::orderBy('id','DESC')
-                  ->where('customer_id',$request['customer_id'])
-                  ->get();
+      $posts = Record::orderBy('id','DESC')
+                  ->where('customer_id',$request['customer_id']);
    
+      $take = 15;
+      $page = intval(request('page',0));
+      $start = $page * $take;
+
+      $posts = $posts->skip($start)->take($take)//for pagination
+                  ->get();
+    
+
     return response()->json($posts);
 
     }
