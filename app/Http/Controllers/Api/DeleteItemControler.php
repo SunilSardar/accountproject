@@ -23,9 +23,9 @@ class DeleteItemControler extends Controller
        $user_id = User::find($request->id);
       
          //delete all the records of that user from record table while deleting that user
-       $record=Record::where('customer_id',$user_id)->delete();
+       $record=Record::where('customer_id',$request['id'])->delete();
 
-       if ($user_id->delete()&& $record) {
+       if ($user_id->delete()||$record) {
             return response()->json([[
           "message" => "records deleted"
         ]], 202);
