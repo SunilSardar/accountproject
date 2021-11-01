@@ -70,6 +70,14 @@ class RecordController extends Controller
    $posts = Record::orderBy('id','DESC')
                   ->where('customer_id',$request['customer_id'])
                   ->get();
+
+    //for pagination
+      // $take = 15;
+      // $page = intval(request('page',0));
+      // $start = $page * $take;
+      
+      // $posts = $posts->skip($start)->take($take)//for pagination
+      //             ->get();              
    
     return response()->json($posts);
 

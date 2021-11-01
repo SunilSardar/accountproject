@@ -48,6 +48,8 @@ Route::prefix('api/mobile')->group(function () {
 
     //deleteitems
     Route::post('deleteItems', 'Api\DeleteItemControler@deleteItems');
+    
+    // Route::post('deleterecords', 'Api\DeleteItemControler@deleterecords');
 
     //today all report
     Route::post('onedayreport', 'Api\TodayReportController@onedayreport');
