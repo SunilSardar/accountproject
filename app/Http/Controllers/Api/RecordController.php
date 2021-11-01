@@ -56,9 +56,7 @@ class RecordController extends Controller
 
    $posts = $posts->skip($start)->take($take)//for pagination
                   ->get();
-    
 
-    
     return response()->json($posts);
 
     }
@@ -66,7 +64,7 @@ class RecordController extends Controller
      public function get_records(Request $request)
     {
       $posts = Record::orderBy('id','DESC')
-                  ->where('customer_id',$request['customer_id']);
+              ->where('customer_id',$request['customer_id']);
    
       $take = 15;
       $page = intval(request('page',0));
@@ -74,9 +72,40 @@ class RecordController extends Controller
 
       $posts = $posts->skip($start)->take($take)//for pagination
                   ->get();
-    
 
-    return response()->json($posts);
+//backend ma calculate garera android ma pathauna
+      $cal_value='0';
+      $transc_amt='0';
+      $total_amt='0';
+
+      $data = Record::orderBy('id','DESC')
+                ->where('customer_id',$request['customer_id'])->get();
+   
+        foreach ($data as $key => $value) {
+                  $transc_amt+=$value->transaction_amount;
+                  $total_amt+=$value->total_amount;
+                  $cal_value=$total_amt-$transc_amt;
+
+
+                  if ($total_amt>$transc_amt) {
+                    $receive=$cal_value;
+                    $pay='0';
+                  }
+                  else {
+                    $pay=$cal_value;
+                    $receive='0';
+                  }   
+                // return response()->json($cal_value);
+            }
+    
+            $response = [
+            'posts' => $posts,
+            'receive' => $receive,
+            'pay' => $pay,
+            ];
+        return response()->json($response);
+          
+
 
     }
 }
