@@ -26,13 +26,12 @@ class HomeController extends Controller
         }
         else{
            return response()->json(['success'=>false,'message'=>'Invalid username or password']);
-        
         }
     }
 
      //sign up
 public function sign_up(Request $request) {
-    
+    // dd("here");
     $todayDate= Carbon::now();
     $user = new User;
     $user->name = $request->name;
@@ -44,7 +43,7 @@ public function sign_up(Request $request) {
     // $user->phone_no = $request->phone_no;
     $user->date =$todayDate->toDateString();
     // $user->user_type = 3;
-    // $user->created_type = '1';
+    //$user->created_type = '1';
     // var_dump($request->name,$request->class);
     $user->save();
 
@@ -56,11 +55,12 @@ public function sign_up(Request $request) {
     //credit
 public function credit(Request $request) {
     
-    // $todayDate= Carbon::now();
+    //$todayDate= Carbon::now();
     $user = new User;
     $user->name = $request->name;
     $user->email = Hash::make($user->name);
     $user->password = 'Null';
+    // $user->type_id = '1';
     // $user->phone_no = $request->phone_no;
     // $user->date_np =$todayDate->toDateString();
     // $user->time_np = date("H:i:s");
@@ -121,7 +121,5 @@ public function debit(Request $request) {
         "message" => "user record created"
     ]], 201);
   }
-
-
   
 }

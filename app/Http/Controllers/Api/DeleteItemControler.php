@@ -21,11 +21,25 @@ class DeleteItemControler extends Controller
     public function deleteItems (Request $request) {
 
        $user_id = User::find($request->id);
+<<<<<<< HEAD
      
         //delete all the records of that user from record table while deleting that user
       $record=Record::where('customer_id',$request['id'])->delete();
 
       if ($user_id->delete()||$record) {
+=======
+      
+         //delete all the records of that user from record table while deleting that user
+       $record=Record::where('customer_id',$request['id'])->delete();
+
+       if ($user_id->delete()||$record) {
+            return response()->json([[
+          "message" => "records deleted"
+        ]], 202);
+    
+        }
+        else{
+>>>>>>> 4bd0c1d0bf1b40935bffe6fbfc69698255cc86d2
            return response()->json([[
          "message" => "records deleted"
        ]], 202);

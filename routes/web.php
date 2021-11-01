@@ -33,7 +33,7 @@ Route::prefix('api/mobile')->group(function () {
     //get customers
     Route::get('getcustomers', 'Api\RecordController@getcustomers');
 
-//get dealers
+    //get dealers
     Route::get('getdealers', 'Api\RecordController@getdealers');
 
     Route::post('get_records', 'Api\RecordController@get_records');
